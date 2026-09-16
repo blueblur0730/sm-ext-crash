@@ -16,6 +16,7 @@ on:
 jobs:
   build:
     strategy:
+      fail-fast: true
       matrix:
         os: [ubuntu-24.04, windows-latest]
         sm_version: [sm_latest, sm_1_12]
@@ -33,7 +34,7 @@ jobs:
             sm_ref: 1.12-dev
     runs-on: ${{ matrix.os }}
     name: Build on ${{ matrix.os }} ${{ matrix.sm_version }} ${{ matrix.target_arch }}
-
+    
     env:
       ARCH: 'x86,x86_64'
       DEPENDENCIES_FOLDER: dependencies
