@@ -22,6 +22,6 @@ else:
 project.sources += sourceFiles
 
 for cxx in builder.targets:
-  binary = Extension.HL2ExtConfig(project, builder, cxx, projectName + '.ext.')
+  binary = Extension.HL2ExtConfig(project, builder, cxx, projectName + '.ext')
 
 Extension.extensions += builder.Add(project)
