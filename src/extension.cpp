@@ -38,14 +38,14 @@
 
 CCrashExtension g_CCrashExtension;		/**< Global singleton for extension's main interface */
 SMEXT_LINK(&g_CCrashExtension);
-
+/*
 void cc_sv_crash_ext( const CCommand &args )
 {
 	int *p = nullptr;
 	int a = *p;
 }
 static ConCommand sv_crash_ext("sv_crash_ext", cc_sv_crash_ext, "Crashes server.", FCVAR_CHEAT);
-
+*/
 bool CCrashExtension::SDK_OnLoad(char* error, size_t maxlen, bool late) 
 {
 	sharesys->RegisterLibrary(myself, "crash_ext");

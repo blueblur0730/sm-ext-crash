@@ -39,7 +39,7 @@
 
 /* Basic information exposed publicly */
 #define SMEXT_CONF_NAME			"Crash Extension"
-#define SMEXT_CONF_DESCRIPTION	"Crash server via command, auto crash when server is empty."
+#define SMEXT_CONF_DESCRIPTION	"Crashes server via native."
 #define SMEXT_CONF_VERSION		"1.0.0"
 #define SMEXT_CONF_AUTHOR		"blueblur"
 #define SMEXT_CONF_URL			"https://github.com/blueblur0730"
