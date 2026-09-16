@@ -34,12 +34,12 @@ def CopyFiles(src, dest, files):
     builder.AddCopy(source_path, dest_entry)
 
 # Include files 
-CopyFiles('addons/sourcemod/scripting/include', 'addons/sourcemod/scripting/include',
-  [ 'crash_ext.inc', ]
-)
-
 CopyFiles('addons/sourcemod/scripting', 'addons/sourcemod/scripting',
   [ 'sm_crash.sp', ]
+)
+
+CopyFiles('addons/sourcemod/scripting/include', 'addons/sourcemod/scripting/include',
+  [ 'crash_ext.inc', ]
 )
 
 # GameData files
