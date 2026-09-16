@@ -53,7 +53,6 @@ bool CCrashExtension::SDK_OnLoad(char* error, size_t maxlen, bool late)
 	return true;
 }
 
-void Sample::SDK_OnAllLoaded() {
 void CCrashExtension::SDK_OnAllLoaded() 
 {
 	sharesys->AddNatives(myself, g_ExtensionNatives);
