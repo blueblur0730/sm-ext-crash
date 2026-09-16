@@ -38,15 +38,11 @@
  */
 
 #include "smsdk_ext.h"
-
+#include "convar.h"
 
 extern const sp_nativeinfo_t g_ExtensionNatives[];
 
-/**
- * @brief Sample implementation of the SDK Extension.
- * Note: Uncomment one of the pre-defined virtual functions in order to use it.
- */
-class Sample : public SDKExtension
+class CCrashExtension : public SDKExtension//, public IConCommandBaseAccessor
 {
 public:
 	/**
@@ -93,7 +89,7 @@ public:
 	 * @param late			Whether or not Metamod considers this a late load.
 	 * @return				True to succeed, false to fail.
 	 */
-	//virtual bool SDK_OnMetamodLoad(ISmmAPI *ismm, char *error, size_t maxlen, bool late);
+	virtual bool SDK_OnMetamodLoad(ISmmAPI *ismm, char *error, size_t maxlen, bool late);
 
 	/**
 	 * @brief Called when Metamod is detaching, after the extension version is called.
@@ -103,7 +99,7 @@ public:
 	 * @param maxlen		Maximum size of error buffer.
 	 * @return				True to succeed, false to fail.
 	 */
-	//virtual bool SDK_OnMetamodUnload(char *error, size_t maxlen);
+	virtual bool SDK_OnMetamodUnload(char *error, size_t maxlen);
 
 	/**
 	 * @brief Called when Metamod's pause state is changing.
@@ -116,6 +112,8 @@ public:
 	 */
 	//virtual bool SDK_OnMetamodPauseChange(bool paused, char *error, size_t maxlen);
 #endif
+//public:
+	//virtual bool RegisterConCommandBase(ConCommandBase *pVar);
 };
 
 #endif // _INCLUDE_SOURCEMOD_EXTENSION_PROPER_H_

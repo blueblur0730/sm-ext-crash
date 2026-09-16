@@ -35,7 +35,11 @@ def CopyFiles(src, dest, files):
 
 # Include files 
 CopyFiles('addons/sourcemod/scripting/include', 'addons/sourcemod/scripting/include',
-  [ 'sample.inc', ]
+  [ 'crash_ext.inc', ]
+)
+
+CopyFiles('addons/sourcemod/scripting', 'addons/sourcemod/scripting',
+  [ 'sm_crash.sp', ]
 )
 
 # GameData files

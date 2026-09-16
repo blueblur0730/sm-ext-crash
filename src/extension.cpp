@@ -1,7 +1,7 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
- * SourceMod Sample Extension
+ * SourceMod CCrashExtension Extension
  * Copyright (C) 2004-2008 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
@@ -36,20 +36,46 @@
  * @brief Implement extension code here.
  */
 
-Sample g_Sample;		/**< Global singleton for extension's main interface */
+CCrashExtension g_CCrashExtension;		/**< Global singleton for extension's main interface */
+SMEXT_LINK(&g_CCrashExtension);
 
-SMEXT_LINK(&g_Sample);
+void cc_sv_crash_ext( const CCommand &args )
+{
+	int *p = nullptr;
+	int a = *p;
+}
+static ConCommand sv_crash_ext("sv_crash_ext", cc_sv_crash_ext, "Crashes server.", FCVAR_CHEAT);
 
-bool Sample::SDK_OnLoad(char* error, size_t maxlen, bool late) {
-	smutils->LogMessage(myself, "Sample extension has been loaded.");
+bool CCrashExtension::SDK_OnLoad(char* error, size_t maxlen, bool late) 
+{
+	sharesys->RegisterLibrary(myself, "crash_ext");
+	smutils->LogMessage(myself, "[SM] CrashExtension extension has been loaded.");
 	return true;
 }
 
 void Sample::SDK_OnAllLoaded() {
+{
 	sharesys->AddNatives(myself, g_ExtensionNatives);
 }
 
-void Sample::SDK_OnUnload()
+void CCrashExtension::SDK_OnUnload()
 {
-	smutils->LogMessage(myself, "Sample extension has been unloaded.");
+	smutils->LogMessage(myself, "[SM] CrashExtension extension has been unloaded.");
 }
+/*
+bool CCrashExtension::SDK_OnMetamodLoad(ISmmAPI *ismm, char *error, size_t maxlen, bool late)
+{
+	ismm->RegisterConCommand(g_PLAPI, &sv_crash_ext);
+	return true;
+}
+
+bool CCrashExtension::SDK_OnMetamodUnload(char *error, size_t maxlen)
+{
+	return true;
+}
+
+bool CCrashExtension::RegisterConCommandBase( ConCommandBase* command )
+{
+	return META_REGCVAR(command);
+}
+*/

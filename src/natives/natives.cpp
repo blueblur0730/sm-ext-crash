@@ -1,12 +1,14 @@
 #include "natives.h"
 
-static cell_t Extension_Loaded(IPluginContext* pContext, const cell_t* params) {
-	smutils->LogMessage(myself, "Sample is loaded.");
-	return 0;
+static cell_t Crash(IPluginContext* pContext, const cell_t* params) 
+{
+	int *p = nullptr;
+	int a = *p;
+	return (cell_t)a;
 }
 
 const sp_nativeinfo_t g_ExtensionNatives[] =
 {
-	{ "Sample_Loaded",                    Extension_Loaded },
+	{ "CrashExt_DoCrash",                    Crash },
 	{ nullptr,                              nullptr }
 };

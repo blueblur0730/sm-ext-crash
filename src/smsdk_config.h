@@ -38,12 +38,12 @@
  */
 
 /* Basic information exposed publicly */
-#define SMEXT_CONF_NAME			"Extension template"
-#define SMEXT_CONF_DESCRIPTION	"Extension template"
-#define SMEXT_CONF_VERSION		"0.0.0.1"
-#define SMEXT_CONF_AUTHOR		"Orange"
-#define SMEXT_CONF_URL			"https://github.com/OrangevichHeh/"
-#define SMEXT_CONF_LOGTAG		"SAMPLE"
+#define SMEXT_CONF_NAME			"Crash Extension"
+#define SMEXT_CONF_DESCRIPTION	"Crash server via command, auto crash when server is empty."
+#define SMEXT_CONF_VERSION		"1.0.0"
+#define SMEXT_CONF_AUTHOR		"blueblur"
+#define SMEXT_CONF_URL			"https://github.com/blueblur0730"
+#define SMEXT_CONF_LOGTAG		"CRASH"
 #define SMEXT_CONF_LICENSE		"GPL"
 #define SMEXT_CONF_DATESTRING	__DATE__
 

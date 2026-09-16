@@ -2,7 +2,7 @@
 import os
 
 # Name of your extesion, this will also be it's file name.
-projectName = 'sample'
+projectName = 'crash'
 
 # smsdk_ext.cpp will be automatically added later
 sourceFiles = [
@@ -21,16 +21,7 @@ else:
 
 project.sources += sourceFiles
 
-for sdk_name in Extension.sdks:
-  sdk = Extension.sdks[sdk_name]
-  if sdk['name'] in ['mock']:
-    continue
-
-  for cxx in builder.targets:
-    if not cxx.target.arch in sdk['platforms'][cxx.target.platform]:
-      continue
-
-    binary = Extension.HL2ExtConfig(project, builder, cxx, projectName + '.ext.' + sdk['extension'], sdk)
-    Extension.AddCDetour(binary)
+for cxx in builder.targets:
+  binary = Extension.HL2ExtConfig(project, builder, cxx, projectName + '.ext.')
 
 Extension.extensions += builder.Add(project)
