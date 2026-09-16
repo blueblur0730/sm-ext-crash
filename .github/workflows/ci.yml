@@ -20,26 +20,37 @@ jobs:
       matrix:
         os: [ubuntu-24.04, windows-latest]
         sm_version: [sm_latest, sm_1_12]
+        target_arch: [x86, x64]
         include:
           - os: ubuntu-24.04
             os_short: linux
             compiler_cc: clang
             compiler_cxx: clang++
+
           - os: windows-latest
             os_short: win
             compiler_cc: msvc
+
           - sm_version: sm_latest
             sm_ref: master
+
           - sm_version: sm_1_12
             sm_ref: 1.12-dev
+
+          - target_arch: x86
+            vs_dev_arch: x86
+
+          - target_arch: x64
+            vs_dev_arch: x86_64
+
     runs-on: ${{ matrix.os }}
     name: Build on ${{ matrix.os }} ${{ matrix.sm_version }} ${{ matrix.target_arch }}
     
     env:
-      ARCH: 'x86,x86_64'
       DEPENDENCIES_FOLDER: dependencies
       DEPENDENCIES_ROOT: ${{ github.workspace }}/dependencies
       REPO_NAME: ${{ github.event.repository.name }}
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v6
@@ -110,7 +121,7 @@ jobs:
       - name: Building
         run: |
           cd "${{ github.workspace }}/build"
-          python ../configure.py --targets=${{ env.ARCH }} --sm-path=${{ env.DEPENDENCIES_ROOT }}/sourcemod
+          python ../configure.py --targets=${{ matrix.target_arch }} --sm-path=${{ env.DEPENDENCIES_ROOT }}/sourcemod
           ambuild
 
       - shell: bash
