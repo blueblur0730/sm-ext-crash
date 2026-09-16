@@ -306,13 +306,13 @@ class ExtensionConfig(object):
 
   def HL2Config(self, project, context, compiler, name):
     binary = project.Configure(compiler, name,
-                               '{0} - {1} {2}'.format(self.tag, compiler.target.arch))
+                               '{0} - {1}'.format(self.tag, compiler.target.arch))
     self.AddCxxCompat(binary)
     return self.ConfigureForHL2(context, binary)
 
   def HL2ExtConfig(self, project, context, compiler, name):
     binary = project.Configure(compiler, name,
-                               '{0} - {1} {2}'.format(self.tag, compiler.target.arch))
+                               '{0} - {1}'.format(self.tag, compiler.target.arch))
     self.AddCxxCompat(binary)
     self.ConfigureForHL2(context, binary)
     self.ConfigureForExtension(context, binary.compiler)
