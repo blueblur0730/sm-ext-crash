@@ -38,7 +38,6 @@
  */
 
 #include "smsdk_ext.h"
-#include "convar.h"
 
 extern const sp_nativeinfo_t g_ExtensionNatives[];
 
