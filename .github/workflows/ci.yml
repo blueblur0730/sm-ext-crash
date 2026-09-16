@@ -42,7 +42,7 @@ jobs:
       REPO_NAME: ${{ github.event.repository.name }}
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
  
@@ -82,7 +82,7 @@ jobs:
           mkdir -p "${{ env.DEPENDENCIES_FOLDER }}"
           
       - name: Getting SourceMod
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: alliedmodders/sourcemod
           path: ${{ env.DEPENDENCIES_ROOT }}/sourcemod
@@ -118,7 +118,7 @@ jobs:
           echo "SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
       
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ env.REPO_NAME }}-${{ matrix.os }}-${{ matrix.sm_version }}-${{ matrix.target_arch }}-${{ env.SHA_SHORT }}
           path: |
