@@ -16,7 +16,7 @@ on:
 jobs:
   build:
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-24.04, windows-latest]
         sm_version: [sm_latest, sm_1_12]
