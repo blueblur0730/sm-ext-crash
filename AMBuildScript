@@ -30,10 +30,6 @@ def SetArchFlags(compiler):
     if compiler.target.arch == 'x86_64':
       compiler.defines += ['WIN64']
 
-SdkHelpers = builder.Eval(hl2sdk_manifests_path, {
-    'Project': 'sm-extension'
-})
-
 class ExtensionConfig(object):
   def __init__(self):
     self.extensions = []
@@ -306,8 +302,6 @@ class ExtensionConfig(object):
 
     for other_sdk in self.sdk_manifests:
       compiler.defines += ['SE_{}={}'.format(other_sdk['define'], other_sdk['code'])]
-
-    SdkHelpers.configureCxx(context, binary, sdk)
 
     return binary
 
