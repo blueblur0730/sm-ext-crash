@@ -44,7 +44,7 @@ CopyFiles('addons/sourcemod/scripting/include', 'addons/sourcemod/scripting/incl
   [ 'crash_ext.inc', ]
 )
 
-CopyFiles('addons/sourcemod/scripting/translations', 'addons/sourcemod/scripting/translations',
+CopyFiles('addons/sourcemod/translations', 'addons/sourcemod/translations',
   [ 'sm_crash.phrases.txt', ]
 )
 
