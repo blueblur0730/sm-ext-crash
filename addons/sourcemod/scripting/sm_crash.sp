@@ -16,8 +16,6 @@ bool
 
 ConVar g_hCvar_DelayForServerRestart;
 ConVar g_hCvar_Hibernate;
-char g_sPath[256];
-bool g_bChangeLevelAvailable = false;
 
 #define PLUGIN_VERSION "1.0"
 
@@ -44,7 +42,6 @@ public void OnPluginStart()
     HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Post);    
 
     RegAdminCmd("sm_crash", Cmd_RestartServer, ADMFLAG_ROOT, "sm_crash - manually force the server to crash");
-    RegAdminCmd("sm_restartmap", Command_RestartMap, ADMFLAG_CHEATS, "Admin starts a restart map action");
 
     g_bFirstMap = true;
     g_bCmdMap = false;
@@ -112,13 +109,11 @@ Action Cmd_RestartServer(int client, int args)
         char steamid[32];
         GetClientAuthId(client, AuthId_SteamID64, steamid, sizeof(steamid), true);
 
-        LogToFileEx(g_sPath, "Manually restarting server... by %N [%s]", client, steamid);
         PrintToServer("Manually restarting server in %.02f seconds later... by %N", g_hCvar_DelayForServerRestart.FloatValue, client);
         CPrintToChatAll("%t", "ManuallyRestartServer", client, g_hCvar_DelayForServerRestart.FloatValue);
     }
     else
     {
-        LogToFileEx(g_sPath, "Manually restarting server by server console...");
         PrintToServer("Manually restarting server in %.02f seconds later... by %N", g_hCvar_DelayForServerRestart.FloatValue, client);
         CPrintToChatAll("%t", "ManuallyRestartServer_NoName", g_hCvar_DelayForServerRestart.FloatValue);
     }
@@ -164,7 +159,6 @@ void Timer_CoolDown(Handle timer, int client)
         return;
     }
     
-    LogToFileEx(g_sPath, "Last one player left the server, Restart server now");
     PrintToServer("Last one player left the server, Restart server now");
 
     UnloadAccelerator();
