@@ -41,7 +41,7 @@
 
 extern const sp_nativeinfo_t g_ExtensionNatives[];
 
-class CCrashExtension : public SDKExtension//, public IConCommandBaseAccessor
+class CCrashExtension : public SDKExtension
 {
 public:
 	/**
@@ -111,8 +111,6 @@ public:
 	 */
 	//virtual bool SDK_OnMetamodPauseChange(bool paused, char *error, size_t maxlen);
 #endif
-//public:
-	//virtual bool RegisterConCommandBase(ConCommandBase *pVar);
 };
 
 #endif // _INCLUDE_SOURCEMOD_EXTENSION_PROPER_H_

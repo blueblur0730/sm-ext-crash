@@ -38,14 +38,7 @@
 
 CCrashExtension g_CCrashExtension;		/**< Global singleton for extension's main interface */
 SMEXT_LINK(&g_CCrashExtension);
-/*
-void cc_sv_crash_ext( const CCommand &args )
-{
-	int *p = nullptr;
-	int a = *p;
-}
-static ConCommand sv_crash_ext("sv_crash_ext", cc_sv_crash_ext, "Crashes server.", FCVAR_CHEAT);
-*/
+
 bool CCrashExtension::SDK_OnLoad(char* error, size_t maxlen, bool late) 
 {
 	sharesys->RegisterLibrary(myself, "crash_ext");
@@ -62,20 +55,3 @@ void CCrashExtension::SDK_OnUnload()
 {
 	smutils->LogMessage(myself, "[SM] CrashExtension extension has been unloaded.");
 }
-/*
-bool CCrashExtension::SDK_OnMetamodLoad(ISmmAPI *ismm, char *error, size_t maxlen, bool late)
-{
-	ismm->RegisterConCommand(g_PLAPI, &sv_crash_ext);
-	return true;
-}
-
-bool CCrashExtension::SDK_OnMetamodUnload(char *error, size_t maxlen)
-{
-	return true;
-}
-
-bool CCrashExtension::RegisterConCommandBase( ConCommandBase* command )
-{
-	return META_REGCVAR(command);
-}
-*/
