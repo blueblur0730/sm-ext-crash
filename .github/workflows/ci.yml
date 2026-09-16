@@ -110,7 +110,7 @@ jobs:
       - name: Building
         run: |
           cd "${{ github.workspace }}/build"
-          python ../configure.py --enable-optimize --targets=${{ env.ARCH }} --sm-path=${{ env.DEPENDENCIES_ROOT }}/sourcemod
+          python ../configure.py --targets=${{ env.ARCH }} --sm-path=${{ env.DEPENDENCIES_ROOT }}/sourcemod
           ambuild
 
       - shell: bash

@@ -15,7 +15,6 @@ bool
     g_bAnyoneConnectedBefore;
 
 ConVar g_hCvar_DelayForServerRestart;
-ConVar g_hCvar_Hibernate;
 
 #define PLUGIN_VERSION "1.0"
 
@@ -35,12 +34,7 @@ public void OnPluginStart()
     CreateConVar("sm_crash_version", PLUGIN_VERSION, "Plugin Version", FCVAR_NOTIFY | FCVAR_DONTRECORD);
     g_hCvar_DelayForServerRestart = CreateConVar("sm_crash_server_delay", "5.0", "Delay for server restart.");
 
-    g_hCvar_Hibernate = FindConVar("sv_hibernate_when_empty");
-    g_hCvar_Hibernate.AddChangeHook(ConVarChanged_Hibernate);
-    ConVarChanged_Hibernate(g_hCvar_Hibernate, "", "");
-
     HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Post);    
-
     RegAdminCmd("sm_crash", Cmd_RestartServer, ADMFLAG_ROOT, "sm_crash - manually force the server to crash");
 
     g_bFirstMap = true;
@@ -91,15 +85,8 @@ public void OnClientConnected(int client)
     if (IsFakeClient(client)) 
         return;
 
-    if (!g_bAnyoneConnectedBefore)
-        g_hCvar_Hibernate.BoolValue = false;
 
     g_bAnyoneConnectedBefore = true;
-}
-
-void ConVarChanged_Hibernate(ConVar hCvar, const char[] sOldVal, const char[] sNewVal)
-{
-    g_hCvar_Hibernate.BoolValue = false;
 }
 
 Action Cmd_RestartServer(int client, int args)
