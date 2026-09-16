@@ -70,9 +70,6 @@ class ExtensionConfig(object):
       return 'Debug'
     return 'Release'
 
-  def shouldIncludeSdk(self, sdk):
-    return not sdk.get('source2', False)
-
   def detectSDKs(self):
     if builder.options.sm_path:
       self.sm_root = builder.options.sm_path
@@ -296,31 +293,28 @@ class ExtensionConfig(object):
         os.path.join(self.sm_root, 'public', 'amtl', 'compat', 'stdcxx.cpp'),
       ]
 
-  def ConfigureForHL2(self, context, binary, sdk):
+  def ConfigureForHL2(self, context, binary):
     compiler = binary.compiler
     SetArchFlags(compiler)
 
-    for other_sdk in self.sdk_manifests:
-      compiler.defines += ['SE_{}={}'.format(other_sdk['define'], other_sdk['code'])]
-
     return binary
 
-  def HL2Library(self, context, compiler, name, sdk):
+  def HL2Library(self, context, compiler, name):
     binary = self.Library(context, compiler, name)
     self.ConfigureForExtension(context, binary.compiler)
-    return self.ConfigureForHL2(context, binary, sdk)
+    return self.ConfigureForHL2(context, binary)
 
-  def HL2Config(self, project, context, compiler, name, sdk):
+  def HL2Config(self, project, context, compiler, name):
     binary = project.Configure(compiler, name,
-                               '{0} - {1} {2}'.format(self.tag, sdk['name'], compiler.target.arch))
+                               '{0} - {1} {2}'.format(self.tag, compiler.target.arch))
     self.AddCxxCompat(binary)
-    return self.ConfigureForHL2(context, binary, sdk)
+    return self.ConfigureForHL2(context, binary)
 
-  def HL2ExtConfig(self, project, context, compiler, name, sdk):
+  def HL2ExtConfig(self, project, context, compiler, name):
     binary = project.Configure(compiler, name,
-                               '{0} - {1} {2}'.format(self.tag, sdk['name'], compiler.target.arch))
+                               '{0} - {1} {2}'.format(self.tag, compiler.target.arch))
     self.AddCxxCompat(binary)
-    self.ConfigureForHL2(context, binary, sdk)
+    self.ConfigureForHL2(context, binary)
     self.ConfigureForExtension(context, binary.compiler)
     return binary
 
