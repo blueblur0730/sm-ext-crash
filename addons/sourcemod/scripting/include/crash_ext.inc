@@ -1,19 +1,19 @@
-#if defined _sample_included
+#if defined _crash_included
   #endinput
 #endif
-#define _sample_included
+#define _crash_included
 
 /**
- * Write if extension was been loaded
+ * Do Crash.
  *
  * @noreturn
  */
-native void Sample_Loaded();
+native void CrashExt_DoCrash();
 
-public Extension __ext_sample = 
+public Extension __ext_crash = 
 {
-	name = "sample",
-	file = "sample.ext",
+	name = "crash",
+	file = "crash.ext",
 #if defined AUTOLOAD_EXTENSIONS
 	autoload = 1,
 #else
@@ -27,8 +27,8 @@ public Extension __ext_sample =
 };
 
 #if !defined REQUIRE_EXTENSIONS
-public void __ext_sample_SetNTVOptional()
+public void __ext_crash_SetNTVOptional()
 {
-    MarkNativeAsOptional("Sample_Loaded");
+    MarkNativeAsOptional("CrashExt_DoCrash");
 }
 #endif

@@ -28,7 +28,6 @@ jobs:
     name: Build on ${{ matrix.os }}
 
     env:
-      SDKS: '["tf2","l4d2","css"]'
       ARCH: 'x86,x86_64'
       DEPENDENCIES_FOLDER: dependencies
       DEPENDENCIES_ROOT: ${{ github.workspace }}/dependencies
@@ -62,27 +61,6 @@ jobs:
           repository: alliedmodders/sourcemod
           path: ${{ env.DEPENDENCIES_ROOT }}/sourcemod
           submodules: recursive
-     
-      - name: Getting Metamod:Source
-        uses: actions/checkout@v4
-        with:
-          repository: alliedmodders/metamod-source
-          ref: ${{ env.MMSOURCE_VERSION }}
-          path: ${{ env.DEPENDENCIES_ROOT }}/metamod-source
-          submodules: recursive
-          
-      - name: Getting SDKs
-        shell: bash
-        run: |
-          cd dependencies
-          git clone --mirror https://github.com/alliedmodders/hl2sdk hl2sdk-proxy-repo
-          sdks=(${{ join(fromJSON(env.SDKS), ' ') }})
-          for sdk in "${sdks[@]}"
-          do
-            git clone hl2sdk-proxy-repo -b $sdk hl2sdk-$sdk
-          done
-          ls -lah
-          cd "${{ github.workspace }}"
 
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
@@ -105,7 +83,7 @@ jobs:
       - name: Building
         run: |
           cd "${{ github.workspace }}/build"
-          python ../configure.py --enable-optimize --sdks=${{ join(fromJSON(env.SDKS)) }} --targets=${{ env.ARCH }} --sm-path=${{ env.DEPENDENCIES_ROOT }}/sourcemod --mms-path=${{ env.DEPENDENCIES_ROOT }}/metamod-source --hl2sdk-root=${{ env.DEPENDENCIES_ROOT }}
+          python ../configure.py --enable-optimize --targets=${{ env.ARCH }} --sm-path=${{ env.DEPENDENCIES_ROOT }}/sourcemod
           ambuild
 
       - shell: bash
