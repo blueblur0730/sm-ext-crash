@@ -1,3 +1,3 @@
 # Crash Extension
 
-This extension crashes server native.
+This extension crashes server via native.
